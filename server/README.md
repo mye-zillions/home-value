@@ -1,27 +1,32 @@
-#Home Value Component 
+Home Value Component 
 
 
-##CRUD API 
+CRUD API 
 ========
-##Property Creation
+Property Creation
+=================
 Writes an entry for a single property to database
 
 > Price strings should be formatted with commas at appropriate places without the $ -- i.e. `53,235`
 
 > Date strings should be formatted as `m/d/yyyy`
 
-###URL
+URL
+-------------
 
 `/api/properties/:propertyId`
 
-###Method: `POST`
+Method: `POST`
+----------
 
-###URL Params: 
+URL Params: 
+----------
 
   Required: 
     `propertyId = [integer]`
 
-###Data Params: 
+Data Params: 
+-----------
   Required: 
   {
     "singlePropertyData": [
@@ -51,57 +56,75 @@ Writes an entry for a single property to database
         }
       ]
   }
-###Success Response: 
-  Code: 201
-  Content:
+Success Response: 
+-----------------
+  Code: 201 | `Created`
 
---------------------------
+-----------------
 
-##Static File Request
+Static File Request
+====================
+
 Fetches static files for correct property page
 
 
-###URL
+URL
+--------
 
 `/:propertyId`
 
-###Method: `GET`
-
-###URL Params: 
+Method: `GET`
+-------------
+URL Params: 
+----------------
 
   Required: 
     `propertyId = [integer]`
-###Data Params: 
+
+Data Params: 
+----------------
   none
 
-###Success Response: 
+Success Response: 
+----------------
   Code: 200 
   Content: <html>
 
-----------------------
+Error Response: 
+----------------
+  Code: 404 | `not found`
 
-##Single Property Request
+===================
+
+Single Property Request
+======================
+
 Fetches associated data for one property and returns the data associated with the single property
 
 > Price strings are formatted with commas at appropriate places without the $ -- i.e. `53,235`
 
 > Date strings are formatted as `m/d/yyyy`
 
-###URL
+URL
+----------------
 
 `/api/properties/:propertyId`
 
-###Method: `GET`
+Method: `GET`
+----------------
 
-###URL Params: 
+URL Params:
+---------------- 
 
   Required: 
     `propertyId = [integer]`
 
-###Data Params: 
+Data Params: 
+----------------
   none
 
-###Success Response: 
+Success Response:
+------------------------ 
   Code: 200 
   Content: `{
     "singlePropertyData": [
@@ -132,27 +155,33 @@ Fetches associated data for one property and returns the data associated with th
       ]`
   }
 
-###Error Response:
-  Code:
+Error Response:
+----------------
+
+  Code: 404 | `Not found`
   Content: 
 
-----------------------------
+=================
 
-##(Multiple) Property Request
+(Multiple) Property Request
+========================
 Fetches associated data for one property and returns the data associated with the single property
 
 > Price strings are formatted with commas at appropriate places without the $ -- i.e. `53,235`
 
 > Date strings are formatted as `m/d/yyyy`
 
-###URL
+URL
+----------------
 
 `/api/properties`
 
-###Method: `GET`
+Method: `GET`
+----------------
 
-###Success Response: 
-  Code: 200 
+Success Response:
+----------------------- 
+  Code: 200 | `OK`
   Content:
 {
     "propertyData": [
@@ -182,40 +211,116 @@ Fetches associated data for one property and returns the data associated with th
         }, ...
     ]
 
+Error Response:
+----------------------- 
+
+  Code: 404 | `Not found`
+
+
 ----------------------------------
 
+Update single property
+======================
 
-###Sample Call: 
----------------------------------
+Updates a listing for a single property in the database
 
+> Price strings should be formatted with commas at appropriate places without the $ -- i.e. `53,235`
 
+> Date strings should be formatted as `m/d/yyyy`
 
-Update / PUT - update an item
------------------------------
------------------------------
+URL: 
+----------------------- 
 
-Delete / DELETE - delete an item
--------------------------------
-
-## Single Property Deletion
-Deletes an entry for a single property from the database
-
-###URL
 
 `/api/properties/:propertyId`
 
-###Method: `DELETE`
+Method: `PUT`
+----------------------- 
 
-###URL Params: 
+URL Params: 
+----------------------- 
+
+  Required: 
+    `propertyId = [integer]`
+
+Data Params: 
+----------------------- 
+
+  Required: 
+  {
+    "singlePropertyData": [
+        {
+            "_id": [string],
+            "id": [int],
+            "zestimationPrice": [string],
+            "startPriceRange": [string],
+            "endPriceRange": [string],
+            "thirtyDayPriceChange": [string],
+            "oneYearForcast": [string],
+            "propertyLastSalePrice": [string],
+            "propertLastSaleDate": [string],
+            "comparableHomePrice": [string],
+            "marketAppreciationPrice": [string],
+            "localSalesAvg": [string],
+            "sellDate": [string],
+            "sellPrice": [string],
+            "beds": [int],
+            "baths":[int],
+            "sqft": "3,427",
+            "streetAddress": [string],
+            "priceSqft": [string],
+            "saleToList": [int],
+            "url": [string],
+            "__v": 0
+        }
+      ]
+  }
+
+Success Response: 
+----------------------- 
+
+  Code: 200 | `OK`
+
+Error Response: 
+----------------------- 
+
+  Code: 404 | `Not found`
+
+======================
+
+Single Property Deletion
+----------------------- 
+
+Deletes an entry for a single property from the database
+
+URL
+----------------------- 
+
+
+`/api/properties/:propertyId`
+
+Method: `DELETE`
+----------------------- 
+
+
+URL Params: 
+----------------------- 
+
 
   Required: 
     `propertyId = [integer]`
 
 
-###Success Response: 
+Success Response: 
+----------------------- 
+
   Code: 200 | `OK`
 
-###Error Response: 
+Error Response: 
+----------------------- 
+
   Code:  405 | `not allowed`
   Code: 404 | `item not found`
+
+
 --------------------------------
