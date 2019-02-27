@@ -3,6 +3,59 @@
 
 ##CRUD API 
 ========
+##Property Creation
+Writes an entry for a single property to database
+
+> Price strings should be formatted with commas at appropriate places without the $ -- i.e. `53,235`
+
+> Date strings should be formatted as `m/d/yyyy`
+
+###URL
+
+`/api/properties/:propertyId`
+
+###Method: `POST`
+
+###URL Params: 
+
+  Required: 
+    `propertyId = [integer]`
+
+###Data Params: 
+  Required: 
+  {
+    "singlePropertyData": [
+        {
+            "_id": [string],
+            "id": [int],
+            "zestimationPrice": [string],
+            "startPriceRange": [string],
+            "endPriceRange": [string],
+            "thirtyDayPriceChange": [string],
+            "oneYearForcast": [string],
+            "propertyLastSalePrice": [string],
+            "propertLastSaleDate": [string],
+            "comparableHomePrice": [string],
+            "marketAppreciationPrice": [string],
+            "localSalesAvg": [string],
+            "sellDate": [string],
+            "sellPrice": [string],
+            "beds": [int],
+            "baths":[int],
+            "sqft": "3,427",
+            "streetAddress": [string],
+            "priceSqft": [string],
+            "saleToList": [int],
+            "url": [string],
+            "__v": 0
+        }
+      ]
+  }
+###Success Response: 
+  Code: 201
+  Content:
+
+--------------------------
 
 ##Static File Request
 Fetches static files for correct property page
@@ -18,6 +71,8 @@ Fetches static files for correct property page
 
   Required: 
     `propertyId = [integer]`
+###Data Params: 
+  none
 
 ###Success Response: 
   Code: 200 
@@ -42,6 +97,9 @@ Fetches associated data for one property and returns the data associated with th
 
   Required: 
     `propertyId = [integer]`
+
+###Data Params: 
+  none
 
 ###Success Response: 
   Code: 200 
@@ -72,6 +130,7 @@ Fetches associated data for one property and returns the data associated with th
             "__v": 0
         }
       ]`
+  }
 
 ###Error Response:
   Code:
@@ -126,8 +185,7 @@ Fetches associated data for one property and returns the data associated with th
 ----------------------------------
 
 
-Create / POST - create a new item
-
+###Sample Call: 
 ---------------------------------
 
 
@@ -138,4 +196,26 @@ Update / PUT - update an item
 
 Delete / DELETE - delete an item
 -------------------------------
+
+## Single Property Deletion
+Deletes an entry for a single property from the database
+
+###URL
+
+`/api/properties/:propertyId`
+
+###Method: `DELETE`
+
+###URL Params: 
+
+  Required: 
+    `propertyId = [integer]`
+
+
+###Success Response: 
+  Code: 200 | `OK`
+
+###Error Response: 
+  Code:  405 | `not allowed`
+  Code: 404 | `item not found`
 --------------------------------
