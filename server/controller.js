@@ -24,7 +24,8 @@ module.exports = {
       if (err) {
         console.log('error posting new propertyData');
       }
-      res.status(201).end();
+      res.status(201);
+      res.send('');
     });
   },
   deleteSinglePropertyData: (req, res) => {
@@ -33,7 +34,8 @@ module.exports = {
       if (err) {
         console.log('error deleting property data');
       }
-      res.status(200).end();
+      res.status(200);
+      res.send('');
     });
   },
   updateSingleProperty: (req, res) => {
@@ -42,7 +44,8 @@ module.exports = {
       if (err) {
         console.log('error updating property data');
       }
-      res.status(200).end();
+      res.status(200);
+      res.send('');
     });
   }
 };
