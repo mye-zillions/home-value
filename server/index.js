@@ -28,6 +28,14 @@ app.get('/api/properties/', controller.handleAllPropertyData);
 // Handle GET request for a single property 
 app.get('/api/properties/:propertyId', controller.handleSinglePropertyData);
 
+//handle POST request for a single property 
+app.post('/api/properties/', controller.postSinglePropertyData);
+
+//handle PUT for a single request for a property
+app.put('/api/properties/:propertyId', controller.updateSingleProperty);
+//handle DELETE for a single property
+app.delete('/api/properties/:propertyId', controller.deleteSinglePropertyData);
+
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });

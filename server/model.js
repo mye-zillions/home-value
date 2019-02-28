@@ -20,7 +20,7 @@ module.exports = {
             propertyData: propertyData, 
             comparableHomesData: comparableHomesData,
             localHomesData: localHomesData,
-          };
+          };  
           console.log('weve fetched all of the data');
           callback(null, data); 
         });
@@ -39,5 +39,33 @@ module.exports = {
       };
       callback(null, singleProperty);
     });
+  },
+  postSinglePropertyData: (obj, callback) => {
+    db.postSingleProperty(obj, (err, singlePropertyData) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, singlePropertyData);
+    });
+  },
+
+  deleteSinglePropertyData: (id, callback) => {
+    db.deleteSingleProperty(id, (err, response) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, response);
+    });
+  },
+  updateSingleProperty: (id, data, callback) => {
+    db.updateSingleProperty(id, data, (err, response) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, response);
+    } );
   }
 };

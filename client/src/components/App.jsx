@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    fetch(`http://ngrok.us-east-1.elasticbeanstalk.com/api/properties/${this.props.propertyId}`)
+    fetch(`http://localhost:8081/api/properties/${this.props.propertyId}`)
       .then((response) => {
         return response.json();
       })
@@ -31,7 +31,7 @@ class App extends React.Component {
           propertyData: data.singlePropertyData
         });
       });
-    fetch('http://ngrok.us-east-1.elasticbeanstalk.com/api/properties')
+    fetch('http://localhost:8081/api/properties')
       .then((response) => {
         return response.json();
       })

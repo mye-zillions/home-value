@@ -18,5 +18,34 @@ module.exports = {
       }
       res.send(data);
     });
+  },
+  postSinglePropertyData: (req, res) => {
+    model.postSinglePropertyData(req.body, (err, data) => {
+      if (err) {
+        console.log('error posting new propertyData');
+      }
+      res.status(201);
+      res.send('');
+    });
+  },
+  deleteSinglePropertyData: (req, res) => {
+    var propertyId = req.params.propertyId;
+    model.deleteSinglePropertyData(propertyId, (err, data) => {
+      if (err) {
+        console.log('error deleting property data');
+      }
+      res.status(200);
+      res.send('');
+    });
+  },
+  updateSingleProperty: (req, res) => {
+    var propertyId = req.params.propertyId;
+    model.updateSingleProperty(propertyId, req.body, (err, data) => {
+      if (err) {
+        console.log('error updating property data');
+      }
+      res.status(200);
+      res.send('');
+    });
   }
-}
+};
