@@ -27,6 +27,19 @@ module.exports = {
       });
     });
   },
+  fetchSinglePropertyData: (id, callback) => {
+    db.readSingleProperty(id, (err, singlePropertyData) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      // Grab the results of the query and clean
+      var singleProperty = {
+        singlePropertyData: singlePropertyData
+      };
+      callback(null, singleProperty);
+    });
+  },
   postSinglePropertyData: (obj, callback) => {
     db.postSingleProperty(obj, (err, singlePropertyData) => {
       if (err) {
