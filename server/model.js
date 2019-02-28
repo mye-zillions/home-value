@@ -20,24 +20,39 @@ module.exports = {
             propertyData: propertyData, 
             comparableHomesData: comparableHomesData,
             localHomesData: localHomesData,
-          };
+          };  
           console.log('weve fetched all of the data');
           callback(null, data); 
         });
       });
     });
   },
-  fetchSinglePropertyData: (id, callback) => {
-    db.readSingleProperty(id, (err, singlePropertyData) => {
+  postSinglePropertyData: (obj, callback) => {
+    db.postSingleProperty(obj, (err, singlePropertyData) => {
       if (err) {
         callback(err);
         return;
       }
-      // Grab the results of the query and clean
-      var singleProperty = {
-        singlePropertyData: singlePropertyData
-      };
-      callback(null, singleProperty);
+      callback(null, singlePropertyData);
     });
+  },
+
+  deleteSinglePropertyData: (id, callback) => {
+    db.deleteSingleProperty(id, (err, response) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, response);
+    });
+  },
+  updateSingleProperty: (id, data, callback) => {
+    db.updateSingleProperty(id, data, (err, response) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, response);
+    } );
   }
 };

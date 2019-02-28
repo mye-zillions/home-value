@@ -90,5 +90,35 @@ module.exports = {
     Property.find({id}, (err, data) => {
       callback(err, data);
     });
+  },
+
+  postSingleProperty: (obj, callback) => {
+    Property.insertOne(obj, (err, data) => { 
+      if (err) {
+        console.log('error inserting single document into properties document', err);
+        return;
+      }
+      console.log('inserted single document into mongoose');
+    });
+  },
+  deleteSingleProperty: (idNum, callback) => {
+    Property.deleteOne({id: idNum}, (err, data) => {
+      if (err) {
+        console.log('error deleting single document from properties document', err);
+        return;
+      }
+      console.log('deleted single document from mongoose');
+    });
+  },
+
+  updateSingleProperty: (idNum, data, callback) => {
+    Property.updateOne({id: idNum}, data, (err, data) => {
+      if (err) {
+        console.log('error deleting updating document');
+        return;
+      }
+      console.log('updated single document');
+    });
   }
+
 };
