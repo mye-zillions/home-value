@@ -1,3 +1,9 @@
+//To generate 10m primary records, 
+//while in sdcDataGeneration folder,
+//run file with following command
+// to avoid heap issues:
+//node --max-old-space-size=8192 primaryDataGeneration.js 
+
 const fs = require('fs');
 const faker = require('faker');
 var csvWriter = require('csv-write-stream');
@@ -9,11 +15,7 @@ var writer = csvWriter({
   sendHeaders: false
 });
 
-//1 ---------
-writer.pipe(fs.createWriteStream('./sdcDataGeneration/primaryentries.csv'));
-// Preping dummyData
-//goal: 10m primary records to file
-var propertyData = [];
+writer.pipe(fs.createWriteStream('./primaryentries.csv'));
 
 var numberWithCommas = (num) => {
   num = num.toString();
@@ -24,18 +26,17 @@ var numberWithCommas = (num) => {
   return num;
 };
 
-// Can create up to 2,000,000 items without running out of heap 
-for (let i = 1; i <= 1000000; i++) {
+for (let i = 0; i < 10001; i++) {
 
   let zestimationPricea = numberWithCommas(faker.random.number({'min': 500000, 'max': 5000000}));
   let thirtyDayPriceChangea = numberWithCommas(faker.random.number({'min': 15000, 'max': 50000}));
   let oneYearForcasta = numberWithCommas(faker.random.number({'min': 500000, 'max': (500000 + 100000)}));
   let comparableHomePricea = numberWithCommas(faker.random.number({'min': (500000 - 100000), 'max': (500000 + 100000)}));
   let marketAppreciationPricea = numberWithCommas(faker.random.number({'min': (500000 - 200000), 'max': (500000)}));
+  
 
   writer.write(
     {
-      id: i,
       zestimationPrice: zestimationPricea,
       thirtyDayPriceChange: thirtyDayPriceChangea,
       oneYearForcast: oneYearForcasta,
@@ -43,28 +44,21 @@ for (let i = 1; i <= 1000000; i++) {
       marketAppreciationPrice: marketAppreciationPricea
     }
   );
-  
 }
 
 writer.end();
 
-//2---------
-
-for (let j = 2; j <= 10; j++) {
-  
-  let startMil = j * 1000000;
-  let endMil = (j + 1) * 1000000;
-
+for (let j = 0; j < 1000; j++) {
   writer = csvWriter({
     separator: ';',
     newline: '\n',
     headers: undefined,
     sendHeaders: false
   });
-  writer.pipe(fs.createWriteStream('./sdcDataGeneration/primaryentries.csv', {flags: 'a'}));
 
+  writer.pipe(fs.createWriteStream('./primaryentries.csv', {flags: 'a'}));
 
-  for (let i = startMil; i <= endMil; i++) {
+  for (let i = 0; i < 10000; i++) {
 
     let zestimationPricea = numberWithCommas(faker.random.number({'min': 500000, 'max': 5000000}));
     let thirtyDayPriceChangea = numberWithCommas(faker.random.number({'min': 15000, 'max': 50000}));
@@ -74,7 +68,6 @@ for (let j = 2; j <= 10; j++) {
 
     writer.write(
       {
-        id: i,
         zestimationPrice: zestimationPricea,
         thirtyDayPriceChange: thirtyDayPriceChangea,
         oneYearForcast: oneYearForcasta,
@@ -87,4 +80,3 @@ for (let j = 2; j <= 10; j++) {
 
   writer.end();
 }
-//----3
