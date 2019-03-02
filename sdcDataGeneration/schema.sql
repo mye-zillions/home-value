@@ -1,11 +1,6 @@
-const { Client } = require('pg');
-const client = new Client();
+CREATE SCHEMA IF NOT EXISTS homeval;
 
-/*
-Playing with postgres commands to create tables and schema: 
-
-
-CREATE SCHEMA homeval;
+DROP TABLE IF EXISTS homeval.homes;
 
 CREATE TABLE homeval.homes (
   id SERIAL PRIMARY KEY, 
@@ -25,8 +20,5 @@ CREATE TABLE homeval.homes (
 );
 
 
-insertion script 
-
 COPY homeval.homes(id,zestimationPrice,thirtyDayPriceChange,oneYearForcast,comparableHomePrice,marketAppreciationPrice,url,sellDate,sellPrice,beds,baths,streetAddress,priceSqft,saleToList) 
 FROM '/Users/pony/SEC/home-value/sdcDataGeneration/primaryentries18.csv' DELIMITER ';' CSV;
-*/
