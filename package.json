@@ -14,7 +14,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
-    "generate-images": "node util/generator.js"
+    "generate-images": "node util/generator.js",
+    "big-data": "time psql -U postgres -f schema.sql"
   },
   "dependencies": {
     "@babel/cli": "^7.2.3",

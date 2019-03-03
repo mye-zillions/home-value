@@ -20,10 +20,35 @@
 
 ------------------------------------
 
-## POSTGRES API ROUTES
+## POSTGRES QUERY NOTES
 ============
 
-CREATE
+##CREATE
+
+Adds a new entry for a home to the database 
+
+URL: `/api/properties`
+
+Method: `POST`
+
+Required data: 
+
+`zestimationPrice,
+thirtyDayPriceChange,
+oneYearForcast,
+comparableHomePrice,
+marketAppreciationPrice,
+url,
+sellDate,
+sellPrice,
+beds,
+baths,
+streetAddress,
+priceSqft,
+saleToList`
+
+
+Associated sample db query: `INSERT INTO homeval.homes(zestimationPrice,thirtyDayPriceChange,oneYearForcast,comparableHomePrice,marketAppreciationPrice,url,sellDate,sellPrice,beds,baths,streetAddress,priceSqft,saleToList) VALUES (12345678, 123456, 123456, 123456, 123456, 'testing 123', '3/2/2019', 123345, 1, 2, '123 test street', 1234, 12345);`
 
 ##REQUEST
 
@@ -38,22 +63,59 @@ URL:
 
 Method: `GET`
 
-Associated db query: `SELECT zestimationPrice thirtyDayPriceChange, oneYearForcast, comparableHomePrice, marketAppreciationPrice FROM homeval.homes WHERE id = 1`
+Associated db query: `SELECT zestimationPrice thirtyDayPriceChange, oneYearForcast, comparableHomePrice, marketAppreciationPrice FROM homeval.homes WHERE id = ?;`
 
 
 -----------------------------------
 Local Homes Data: 
-Recieves the information with 10 associated local homes
+Recieves the information with 20 associated local homes
 
 
-----------------------------------
-
-Comparable Homes Data: 
-Recieves the information for 10 associated comparable homes 
+sample query:
+`SELECT id url, sellDate, sellPrice, beds, baths, streetAddress, priceSqft, saleToList FROM homeval.homes ORDER BY id LIMIT 20 OFFSET 30;`
 
 -----------------------------------
-UPDATE
+##UPDATE
 
-DELETE
+Adds a new entry for a home to the database 
+
+URL: `/api/properties`
+
+Method: `PUT`
+
+Optional data: 
+
+`zestimationPrice,
+thirtyDayPriceChange,
+oneYearForcast,
+comparableHomePrice,
+marketAppreciationPrice,
+url,
+sellDate,
+sellPrice,
+beds,
+baths,
+streetAddress,
+priceSqft,
+saleToList`
+
+
+sample query: 
+`UPDATE homeval.homes SET streetAddress = 'alternate test' WHERE id = 10000003;`
+
+##DELETE
+
+Adds a new entry for a home to the database 
+
+URL: `/api/properties`
+
+Method: `DELETE`
+
+Required data: 
+
+`id to delete`
+
+sample query: 
+`DELETE FROM homeval.homes WHERE id = 10000003;`
 
 ------------------------------------
