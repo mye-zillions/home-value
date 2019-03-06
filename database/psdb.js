@@ -16,6 +16,18 @@ client.connect()
   .catch(e => console.error('connection error', err.stack));
 
 module.exports = {
+  postSingleProperty: (obj, cb) => {
+    const text = 'INSERT INTO homes2.homes (zestimationPrice,thirtyDayPriceChange,oneYearForcast,comparableHomePrice,marketAppreciationPrice,url,sellDate,sellPrice,beds,baths,streetAddress,priceSqft,saleToList) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)';
+    const values = [obj.zestimationPrice, obj.thirtyDayPriceChange, obj.oneYearForcast, obj.comparableHomePrice, obj.marketAppreciationPrice, obj.url, obj.sellDate, obj.sellPrice, obj.beds, obj.baths, obj.streetAddress, obj.priceSqft, obj.saleToList];
+
+    client.query(text, values, (err, res) => {
+      if (err) {
+        console.log(err.stack);
+      } else {
+        cb(null, res);
+      }
+    });
+  },
   readSingleProperty: (id, cb) => {
     const text = 'SELECT zestimationPrice, thirtyDayPriceChange, oneYearForcast, comparableHomePrice, marketAppreciationPrice FROM homes2.homes WHERE id = $1;';
     const values = [id];
@@ -45,5 +57,19 @@ module.exports = {
         cb(null, res.rows);
       }
     }); 
+  },
+
+  deleteSingleProperty: (id, cb) => {
+    let text = 'DELETE FROM homes2.homes where id = $1';
+    let values = [id];
+    client.query(text, values, (err, res) => {
+      if (err) {
+        console.log(err.stack);
+      } else {
+        cb (null, res);
+      }
+    });
   }
+
+
 };
