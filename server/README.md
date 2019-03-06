@@ -29,7 +29,6 @@ Data Params:
 -----------
   Required: 
   {
-    "singlePropertyData": [
         {
             "_id": [string],
             "id": [int],
@@ -50,11 +49,10 @@ Data Params:
             "sqft": "3,427",
             "streetAddress": [string],
             "priceSqft": [string],
-            "saleToList": [int],
+            "saleToList": [string],
             "url": [string],
             "__v": 0
         }
-      ]
   }
 
 
@@ -136,27 +134,12 @@ Success Response:
             "_id": [string],
             "id": [int],
             "zestimationPrice": [string],
-            <!-- "startPriceRange": [string],
-            "endPriceRange": [string], -->
             "thirtyDayPriceChange": [string],
             "oneYearForcast": [string],
-            <!-- "propertyLastSalePrice": [string], -->
-            <!-- "propertLastSaleDate": [string], -->
             "comparableHomePrice": [string],
-            "marketAppreciationPrice": [string],
-            <!-- "localSalesAvg": [string], -->
-            <!-- "sellDate": [string], -->
-            <!-- "sellPrice": [string], -->
-            <!-- "beds": [int], -->
-            <!-- "baths":[int], -->
-            <!-- "sqft": "3,427", -->
-            <!-- "streetAddress": [string], -->
-            <!-- "priceSqft": [string], -->
-            <!-- "saleToList": [int], -->
-            <!-- "url": [string], -->
-            "__v": 0
+            "marketAppreciationPrice": [string]
         }
-      ]`
+      ]
   }
 
 Error Response:
@@ -169,7 +152,7 @@ Error Response:
 
 (Multiple) Property Request
 ========================
-Fetches associated data for one property and returns the data associated with the single property
+Fetches associated data for one property and returns an array of 20 properties with data associated with the current property page
 
 > Price strings are formatted with commas at appropriate places without the $ -- i.e. `53,235`
 
@@ -190,8 +173,19 @@ Success Response:
 {
     "localHomesData": [
         {
-            "_id": "5c72f65247c1986e9fb0db59",
-            "id": 1,
+            "id": 2,
+            "sellDate": "6/30/2016",
+            "sellPrice": "3,779,015",
+            "beds": 4,
+            "baths": 2,
+            "sqft": "3,216",
+            "streetAddress": "3648 Cody Terrace",
+            "priceSqft": "2,369",
+            "saleToList": "92",
+            "url": "https://s3-us-west-1.amazonaws.com/zillow-talk-home-component/large1.jpg",
+        },
+        {
+            "id": 3,
             "sellDate": "6/30/2016",
             "sellPrice": "3,779,015",
             "beds": 4,
@@ -201,13 +195,11 @@ Success Response:
             "priceSqft": "2,369",
             "saleToList": 92,
             "url": "https://s3-us-west-1.amazonaws.com/zillow-talk-home-component/large1.jpg",
-            "__v": 0
-        },
+        }, ...
     ],
     "comparableHomesData": [
         {
-            "_id": "5c72f65247c1986e9fb0daf6",
-            "id": 1,
+            "id": 2,
             "sellDate": "2/11/2017",
             "sellPrice": "1,759,186",
             "beds": 2,
@@ -216,7 +208,17 @@ Success Response:
             "streetAddress": "4504 Velma Walks",
             "priceSqft": "2,498",
             "url": "https://s3-us-west-1.amazonaws.com/zillow-talk-home-component/large1.jpg",
-            "__v": 0
+        },
+        {
+            "id": 3,
+            "sellDate": "2/11/2017",
+            "sellPrice": "1,759,186",
+            "beds": 2,
+            "baths": 3,
+            "sqft": "2,986",
+            "streetAddress": "4504 Velma Walks",
+            "priceSqft": "2,498",
+            "url": "https://s3-us-west-1.amazonaws.com/zillow-talk-home-component/large1.jpg",
         },
     ]
 
@@ -241,7 +243,6 @@ Updates a listing for a single property in the database
 URL: 
 ----------------------- 
 
-
 `/api/properties/:propertyId`
 
 Method: `PUT`
@@ -258,9 +259,7 @@ Data Params:
 
   Required: 
   {
-    "singlePropertyData": [
         {
-            "_id": [string],
             "id": [int],
             "zestimationPrice": [string],
             "startPriceRange": [string],
@@ -281,9 +280,7 @@ Data Params:
             "priceSqft": [string],
             "saleToList": [int],
             "url": [string],
-            "__v": 0
         }
-      ]
   }
 
 Success Response: 
