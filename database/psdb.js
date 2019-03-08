@@ -1,25 +1,36 @@
-const { Client } = require('pg');
+const { Pool, Client } = require('pg');
 const credentials = require('../credentials');
 
-const client = new Client({
+
+const pool = new Pool({
   user: credentials.username,
   host: credentials.host,
   database: credentials.database,
   password: credentials.password,
   port: credentials.port
-});
+}
+);
+// const client = new Client({
+//   user: credentials.username,
+//   host: credentials.host,
+//   database: credentials.database,
+//   password: credentials.password,
+//   port: credentials.port
+// });
 
 let currentid = 1;
 
-client.connect()
+pool.connect()
+//client.connect()
   .then(() => console.log('connected'))
   .catch(e => console.error('connection error', err.stack));
 
 module.exports = {
   postSingleProperty: (obj, cb) => {
-    const text = 'INSERT INTO homes2.homes (zestimationPrice,thirtyDayPriceChange,oneYearForcast,comparableHomePrice,marketAppreciationPrice,url,sellDate,sellPrice,beds,baths,streetAddress,priceSqft,saleToList) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)';
-    const values = [obj.zestimationPrice, obj.thirtyDayPriceChange, obj.oneYearForcast, obj.comparableHomePrice, obj.marketAppreciationPrice, obj.url, obj.sellDate, obj.sellPrice, obj.beds, obj.baths, obj.streetAddress, obj.priceSqft, obj.saleToList];
 
+    const text = 'INSERT INTO homes2.homes (zestimationprice,thirtydaypricechange,oneyearforcast,comparablehomeprice,marketappreciationprice,url,selldate,sellprice,beds,baths,streetaddress,pricesqft,saletolist) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)';
+    const values = [obj.zestimationPrice, obj.thirtyDayPriceChange, obj.oneYearForcast, obj.comparableHomePrice, obj.marketAppreciationPrice, obj.url, obj.sellDate, obj.sellPrice, obj.beds, obj.baths, obj.streetAddress, obj.priceSqft, obj.saleToList];
+    // pool.query(text, values, (err, res) => {
     client.query(text, values, (err, res) => {
       if (err) {
         console.log(err.stack);
@@ -33,8 +44,8 @@ module.exports = {
     const values = [id];
 
     currentid = id;
-
-    client.query(text, values, (err, res) => {
+    pool.query(text, values, (err, res) => {
+    //client.query(text, values, (err, res) => {
       if (err) {
         console.log(err.stack);
       } else {
@@ -49,8 +60,8 @@ module.exports = {
       values = [Number(currentid) - 19, Number(currentid)];
     }
 
-
-    client.query(text, values, (err, res) => {
+    pool.query(text, values, (err, res) => {
+    //client.query(text, values, (err, res) => {
       if (err) {
         console.log(err.stack);
       } else {
@@ -62,7 +73,20 @@ module.exports = {
   deleteSingleProperty: (id, cb) => {
     let text = 'DELETE FROM homes2.homes where id = $1';
     let values = [id];
-    client.query(text, values, (err, res) => {
+    pool.query(text, values, (err, res) => {
+      // client.query(text, values, (err, res) => {
+      if (err) {
+        console.log(err.stack);
+      } else {
+        cb (null, res);
+      }
+    });
+  },
+  updateSingleProperty: (id, data, cb) => {
+    let text = 'UPDATE FROM homes2.homes where id = $1';
+    let values = [id];
+    pool.query(text, values, (err, res) => {
+    //client.query(text, values, (err, res) => {
       if (err) {
         console.log(err.stack);
       } else {

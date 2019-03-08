@@ -1,0 +1,33 @@
+config:
+  target: 'http://localhost:8081'
+  processor: "./artilleryprocessor.js"
+  phases:
+    - duration: 60
+      arrivalRate: 1500
+  defaults:
+    headers:
+scenarios:
+- name: "Look at houses"
+  flow:
+    - function: "randomId"
+    - get:
+        url: "/{{ id }}"
+    - log: "get request sent to /{{ id }}"
+    - function: "randomPost"
+    - post:
+        url: "/api/properties/"
+        json: 
+          zestimationPrice: "{{ zestimationPrice }}"
+          thirtyDayPriceChange: "{{ thirtyDayPriceChange }}"
+          oneYearForcast: "{{ oneYearForcast }}"
+          comparableHomePrice: "{{ comparableHomePrice }}"
+          marketAppreciationPrice: "{{ marketAppreciationPrice }}"
+          url: "{{ url }}"
+          sellDate: "{{ sellDate }}"
+          sellPrice: "{{ sellPrice }}"
+          beds: "{{ beds }}"
+          baths: "{{ baths }}"
+          streetAddress: "{{ streetAddress }}"
+          priceSqft: "{{ priceSqft }}"
+          saleToList: "{{ saleToList }}"
+    - log: "Post request with street address: {{ streetAddress }}"

@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:8081'
+  processor: "./artilleryprocessor.js"
+  phases:
+    - duration: 60
+      arrivalRate: 1000
+  defaults:
+    headers:
+scenarios:
+- name: "Look at houses 1"
+  flow:
+    - function: "randomId1"
+    - get:
+        url: "/{{ id1 }}"
+    - log: "get request sent to /{{ id1 }}"

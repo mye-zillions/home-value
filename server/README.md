@@ -28,33 +28,38 @@ URL Params:
 Data Params: 
 -----------
   Required: 
-  {
-        {
-            "_id": [string],
-            "id": [int],
-            "zestimationPrice": [string],
-            "startPriceRange": [string],
-            "endPriceRange": [string],
-            "thirtyDayPriceChange": [string],
-            "oneYearForcast": [string],
-            "propertyLastSalePrice": [string],
-            "propertLastSaleDate": [string],
-            "comparableHomePrice": [string],
-            "marketAppreciationPrice": [string],
-            "localSalesAvg": [string],
-            "sellDate": [string],
-            "sellPrice": [string],
-            "beds": [int],
-            "baths":[int],
-            "sqft": "3,427",
-            "streetAddress": [string],
-            "priceSqft": [string],
-            "saleToList": [string],
-            "url": [string],
-            "__v": 0
-        }
-  }
+{
+	zestimationPrice:<string>,
+	thirtyDayPriceChange:<string>,
+	oneYearForcast:<string>,
+	comparableHomePrice:<string>,
+	marketAppreciationPrice:<string>,
+	url:<string>,
+	sellDate:<string>,
+	sellPrice:<string>,
+	beds:<int>,
+	baths:<int>,
+	streetAddress:<string>,
+	priceSqft: <string>,
+	saleToList: <string>
+}
 
+postman example: 
+{
+	"zestimationPrice" : "12,345",
+	"thirtyDayPriceChange" : "12,345",
+	"oneYearForcast" : "12,345",
+	"comparableHomePrice" : "12,345",
+	"marketAppreciationPrice" : "12,345",
+	"url" : "12,345",
+	"sellDate" : "test",
+	"sellPrice" : "12,345",
+	"beds" : 3,
+	"baths" : 2,
+	"streetAddress" : "Testing123",
+	"priceSqft" : "12,345",
+	"saleToList": "12,345"
+}
 
 Success Response: 
 
