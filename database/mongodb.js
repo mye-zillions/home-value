@@ -1,3 +1,4 @@
+//depreciated in favor of postgres
 const mongoose = require('mongoose');
 var faker = require('faker');
 mongoose.connect('mongodb+srv://john:zillowtalk@zillow-talk-db-ujzgi.mongodb.net/test?retryWrites=true');

@@ -1,30 +1,48 @@
-const db = require('../database/db.js');
+const db = require('../database/psdb.js');
+//const db = require('../database/mongodb.js');
 
 module.exports = {
   fetchAllPropertyData: (callback) => {
-    db.readAllProperties((err, propertyData) => {
+    db.readRelatedProperties((err, propertyData) => {
       if (err) {
         callback(err);
       }
-      db.readAllComparableHomes((err, comparableHomesData) => {
-        if (err) {
-          callback(err);
-          return;
-        }
-        db.readAllLocalHomes((err, localHomesData) => {
-          if (err) {
-            callback(err);
-            return; 
-          }
-          var data = {
-            propertyData: propertyData, 
-            comparableHomesData: comparableHomesData,
-            localHomesData: localHomesData,
-          };  
-          console.log('weve fetched all of the data');
-          callback(null, data); 
+
+      let compHomesData = [];
+      let locHomesData = [];
+
+      for (let i = 0; i < 10; i++) {
+        let row = propertyData[i];
+
+        compHomesData.push({
+          url: row.url,
+          sellDate: row.selldate,
+          sellPrice: row.sellprice,
+          beds: row.beds,
+          baths: row.baths,
+          streetAddress: row.streetaddress,
+          priceSqft: row.pricesqft
         });
-      });
+      }
+      for (let i = 10; i < 20; i++) {
+        let row = propertyData[i];
+
+        locHomesData.push({
+          url: row.url,
+          sellDate: row.selldate,
+          sellPrice: row.sellprice,
+          beds: row.beds,
+          baths: row.baths,
+          streetAddress: row.streetaddress,
+          saleToList: row.saletolist
+        });
+      }
+      var data = {
+        comparableHomesData: compHomesData,
+        localHomesData: locHomesData,
+      };  
+      callback(null, data); 
+
     });
   },
   fetchSinglePropertyData: (id, callback) => {
@@ -33,13 +51,25 @@ module.exports = {
         callback(err);
         return;
       }
-      // Grab the results of the query and clean
+      
+      //Format db data to conform to front end [int => string]
+      let cleanObj = {
+        zestimationPrice: singlePropertyData.zestimationprice,
+        thirtyDayPriceChange: singlePropertyData.thirtydaypricechange,
+        oneYearForcast: singlePropertyData.oneyearforcast,
+        comparableHomePrice: singlePropertyData.comparablehomeprice,
+        marketAppreciationPrice: singlePropertyData.marketappreciationprice
+      };
+     
       var singleProperty = {
-        singlePropertyData: singlePropertyData
+        
+        singlePropertyData: [cleanObj]
       };
       callback(null, singleProperty);
     });
   },
+
+  //
   postSinglePropertyData: (obj, callback) => {
     db.postSingleProperty(obj, (err, singlePropertyData) => {
       if (err) {

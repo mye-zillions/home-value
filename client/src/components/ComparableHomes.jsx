@@ -32,9 +32,9 @@ class ComparableHomes extends React.Component {
           </ComparableHomesHeader>
           <ComparableHomesListHeader>
             Top comparable homes in this estimate
-             <ComparableHomesListHeaderSqft>
+            <ComparableHomesListHeaderSqft>
                 $/sqft
-              </ComparableHomesListHeaderSqft>
+            </ComparableHomesListHeaderSqft>
           </ComparableHomesListHeader>
           <ComparableHomesList>
             <PropertyList>

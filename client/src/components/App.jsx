@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    fetch(`http://localhost:8081/api/properties/${this.props.propertyId}`)
+    fetch(`/api/properties/${this.props.propertyId}`)
       .then((response) => {
         return response.json();
       })
@@ -31,7 +31,7 @@ class App extends React.Component {
           propertyData: data.singlePropertyData
         });
       });
-    fetch('http://localhost:8081/api/properties')
+    fetch('/api/properties')
       .then((response) => {
         return response.json();
       })

@@ -1,7 +1,7 @@
 {
-  "name": "john-sprague-component-home-value",
-  "description": "Front end capstone project, buy a home from zillow.com, home value component.",
-  "author": "John Sprague",
+  "name": "home-value",
+  "description": "Optimize backend",
+  "author": "John Sprague | Yvonne Pon",
   "license": "ISC",
   "main": "index.js",
   "engines": {
@@ -10,7 +10,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch ",
     "start": "node server/index.js",
-    "seed-db": "node database/seeder.js",
+    "seed-db": "node database/mongoseeder.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
@@ -25,6 +25,7 @@
     "csv-write-stream": "^2.0.0",
     "express": "^4.16.4",
     "fast-csv": "^2.4.1",
+    "moment": "^2.24.0",
     "mongo": "^0.1.0",
     "mongoose": "^5.4.10",
     "path": "^0.12.7",
