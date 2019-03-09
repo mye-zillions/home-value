@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const controller = require('./controller.js');
-// const newrelic = require('newrelic');
 const app = express();
 const port = 8081;
 const serve = express.static('./public/dist');
