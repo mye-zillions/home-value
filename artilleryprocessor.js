@@ -2,12 +2,26 @@ const faker = require('faker');
 const moment = require('moment');
 module.exports = {
   randomId1,
+  randomId2,
+  randomId3,
   randomPost
 };
 
 function randomId1(userContext, events, done) {
   const id = faker.random.number({'min': 1, 'max': 10000000});
   userContext.vars.id1 = id;
+
+  return done();
+}
+function randomId2(userContext, events, done) {
+  const id = faker.random.number({'min': 6000000, 'max': 10000000});
+  userContext.vars.id2 = id;
+
+  return done();
+}
+function randomId3(userContext, events, done) {
+  const id = faker.random.number({'min': 9000000, 'max': 10000000});
+  userContext.vars.id3 = id;
 
   return done();
 }

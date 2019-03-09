@@ -13,3 +13,17 @@ scenarios:
     - get:
         url: "/{{ id1 }}"
     - log: "get request sent to /{{ id1 }}"
+- name: "Look at houses 2"
+  weight: 2
+  flow:
+    - function: "randomId2"
+    - get:
+        url: "/{{ id2 }}"
+    - log: "get request sent to /{{ id2 }}"
+- name: "Look at houses 1"
+  weight: 3
+  flow:
+    - function: "randomId3"
+    - get:
+        url: "/{{ id3 }}"
+    - log: "get request sent to /{{ id3 }}"
