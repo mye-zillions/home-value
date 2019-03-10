@@ -2,6 +2,7 @@ const db = require('../database/psdb.js');
 //const db = require('../database/mongodb.js');
 
 module.exports = {
+  //handle get request for related properties [20]
   fetchAllPropertyData: (callback) => {
     db.readRelatedProperties((err, propertyData) => {
       if (err) {
@@ -45,6 +46,7 @@ module.exports = {
 
     });
   },
+  //handle get request for single property
   fetchSinglePropertyData: (id, callback) => {
     db.readSingleProperty(id, (err, singlePropertyData) => {
       if (err) {
@@ -69,7 +71,7 @@ module.exports = {
     });
   },
 
-  //
+  //handle post request
   postSinglePropertyData: (obj, callback) => {
     db.postSingleProperty(obj, (err, singlePropertyData) => {
       if (err) {
@@ -79,7 +81,7 @@ module.exports = {
       callback(null, singlePropertyData);
     });
   },
-
+  //handle delete request
   deleteSinglePropertyData: (id, callback) => {
     db.deleteSingleProperty(id, (err, response) => {
       if (err) {
@@ -89,7 +91,8 @@ module.exports = {
       callback(null, response);
     });
   },
-  updateSingleProperty: (id, data, callback) => {
+  //handle put request
+  updateSingleProperty: (id, obj, callback) => {
     db.updateSingleProperty(id, data, (err, response) => {
       if (err) {
         callback(err);
