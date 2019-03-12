@@ -22,7 +22,7 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount () {
+ componentDidMount () {
     fetch(`/api/properties/${this.props.propertyId}`)
       .then((response) => {
         return response.json();

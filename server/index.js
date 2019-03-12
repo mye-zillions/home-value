@@ -1,10 +1,13 @@
 const nr = require('newrelic');
 const express = require('express');
 const path = require('path');
+const compression = require('compression');
 const bodyParser = require('body-parser');
+
 const controller = require('./controller.js');
 const app = express();
 const port = 8081;
+//const port = 80;
 const serve = express.static('./public/dist');
 
 // CORS 
@@ -14,9 +17,14 @@ app.use((req, res, next) => {
   next();
 });
 // Serve static files 
+app.use(compression());
 app.use('/', serve);
 app.use(bodyParser.json());
 
+//loaderio credentials 
+app.get('/loaderio-5f49df0bf8206276c2c341dc9edff517', (req, res) => {
+  res.send('loaderio-5f49df0bf8206276c2c341dc9edff517');
+});
 // Handle GET request for index.html
 app.get('/:propertyId', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../public/dist/index.html'));
