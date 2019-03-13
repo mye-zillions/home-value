@@ -4,7 +4,7 @@ module.exports = {
   handleAllPropertyData: (req, res) => {
     model.fetchAllPropertyData((err, data) => {
       if (err) {
-        console.log('error GET request from the controller');
+        res.send(err);
         return;
       }
       res.send(data);
@@ -14,7 +14,8 @@ module.exports = {
     var propertyId = req.params.propertyId;
     model.fetchSinglePropertyData(propertyId, (err, data) => {
       if (err) {
-        console.log('error fetching propertyData');
+        res.send(err);
+        return;
       }
       res.send(data);
     });
